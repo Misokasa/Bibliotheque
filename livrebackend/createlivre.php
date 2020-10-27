@@ -1,77 +1,88 @@
 <?php
 include "../security/secure.php";
-include "../includes/database.php";
-include "../includes/define.php";
 include "../includes/functions.php";
-
- // Vérifier si le formulaire est soumis
-//var_dump($_POST);
-         if(@$_POST['titre']!="" && @$_POST['id_auteur']!="" && @$_POST['genre']!="" ){
+include "../includes/database.php";
 
 
-     // récupérer les données du formulaire en utilisant la valeur des attributs name comme clé
-     $titre = $_POST['titre'];
-     $publication = $_POST['date_de_publication'];
-     $genre = $_POST['genre'];
-     $auteur = $_POST['id_auteur'];
-     $editeur = $_POST['id_editeur'];
-     $bibliotheque = $_POST['id_bibliotheque'];
+        if(@$_POST['titre']!="")
+        {
 
-     // changement fonction pour fichier
-     $logo =  uploadfile('logo_livre');
+        /*$servername = 'localhost'; //connexion en local
+            $username = 'root'; // par défaut
+            $password = ''; // rien par défaut
+
+            //On établit la connexion
+            $conn = new mysqli($servername, $username, $password);
+
+            //On vérifie la connexion
+            if($conn->connect_error){
+                die('Erreur : ' .$conn->connect_error);
+            }
+            echo 'Connexion réussie';*/
 
 
 
+            $titre = $_POST['titre'];
+            $genre = $_POST['genre'];
+            $auteur = $_POST['id_auteur'];
+            $editeur = $_POST['id_editeur'];
+            $publication= $_POST['date_de_publication'];
+            $bibliotheque=$_POST["id_bibliotheque"];
+			      $logo=uploadfile("logo_livre",true);
+            $description=$_POST["description"];
+            $page=$_POST["page"];
+            $prix=$_POST["prix"];
+
+            //On établit la connexion
             try{
 
-// INSERTION DANS LA TABLE LIVRE
-                $sql = "INSERT INTO livre (id_bibliotheque,titre,genre,logo_livre)
-                        VALUES(:id_bibliotheque,:titre,:genre,:logo_livre)";
+                 // Insertion dans la table livre
 
-                      $sth = $dbco->prepare($sql);
+                $sql = "INSERT INTO livre (titre,genre,logo_livre,id_bibliotheque,description,page,prix)
+                VALUES(:titre,:genre,:logo,:bibliotheque,:description,:page,:prix)";
 
-                $params=array(
+                $sth = $dbco->prepare( $sql);
 
-                                    ':id_bibliotheque' => "$bibliotheque",
-                                    ':titre' => "$titre",
-                                    ':genre' => "$genre",
-                                    ':logo_livre' => "$logo",
-               );
+                $params=[
+                ':titre' => $titre,
+                ':genre' => $genre,
+                ':id_bibliotheque' => $bibliotheque,
+                ':logo_livre' => $logo,
+                ':description' => $description,
+                ':page' => $page,
+                ':prix' => $prix];
+
+                $sth->execute($params);
+                $livre=$dbco->lastInsertId();
+
+                // Insertion dans la table publier
+                 $sql = "INSERT INTO publier (id_editeur,id_auteur,id_livre,date_de_publication)
+                VALUES(:id_editeur,:id_auteur,:id_livre,:date_de_publication)";
+
+                $sth = $dbco->prepare( $sql);
+
+                $params=[
+                ':id_editeur' => $editeur,
+                ':id_auteur' => $auteur,
+                ':id_livre' => $livre,
+                ':date_de_publication' => $publication];
+
 
                 $sth->execute($params);
 
-                $livre=$dbco->lastInsertId();
-
-// INSERTION DANS LA TABLE PUBLIER
-                $sql = "INSERT INTO publier (id_livre,id_editeur,id_auteur,date_de_publication)
-                        VALUES  (:id_livre,:id_editeur,:id_auteur,:date_de_publication)";
-
-                        $sth = $dbco->prepare($sql);
-
-                  $params3=array(
-
-                    ':id_livre' => "$id_livre",
-                    ':id_auteur' => "$auteur",
-                    ':id_editeur' => "$editeur",
-                    ':date_de_publication' => $publication,
-);
 
 
-              $sth->execute($params3);
+                header('Location:../admin/starter.php?page=livrelist');
 
-				          header('Location:../admin/starter.php?page=livrelist');
-                  echo 'Entree ajoutee dans la table';
+                echo "Entrée ajoutée dans la table";
 
-             }
-             /*
-                echo 'Entrée ajoutée dans la table';
-            /*On capture les exceptions si une exception est lancée et on affiche
-             *les informations relatives à celle-ci*/
+            }
 
             catch(PDOException $e){
-
-                   // $conn->rollBack();
               echo "Erreur : " . $e->getMessage();
             }
-    }
-?>
+
+
+        }
+
+        ?>

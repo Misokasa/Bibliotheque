@@ -1,84 +1,102 @@
 <?php
 include "../security/secure.php";
 
-?>
-<!DOCTYPE html>
+include "../includes/database.php";
+include "../includes/define.php";
 
+?>
+
+ <!DOCTYPE html>
 <html>
-
-  <head>
-
-      <title> LIVRELIST </title>
-
-      <meta charset='utf-8'>
-      <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-      <link rel="stylesheet" href="../css/livre.css">
-
+    <head>
+        <title>Cours PHP / MySQL</title>
+        <meta charset='utf-8'>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+           <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+          <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
-
     <body>
+        <h1>Bases de données MySQL</h1>
+		<style>
+	.custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+            img {
+		width:75px;
+		height:50px;
+	}
+	</style>
 
-      <h1> Cours PHP / MySQL </h1>
-          <h3> Base de données MySQL </h3>
 
-          <a class='btn btn-info btn-xs' href='starter.php?page=formlivre'><span class='glyphicon glyphicon-edit'></span> Ajouter Livre </a>
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+     <a class='btn btn-success btn-xs' href='?page=formlivre'><span class='glyphicon glyphicon-add'></span> Add</a>
 
-          <div class="container">
-              <div class="row col-md-6 col-md-offset-2 custyle">
-                  <table class="table table-striped custab">
+<table class="table table-striped custab">
+        <?php
 
-<?php
 
-                      $servname = "localhost"; $dbname = "bd_megane_biblio"; $livre = "root"; $password = "";
-                      try{$dbco = new PDO("mysql:host=$servname;dbname=$dbname", $livre, $password);
-                        $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            try{
 
-                        // Sélectionne toutes les livres dans la table ppublier
 
-                        $anyname = $dbco->prepare(
-                          "SELECT livre.id_livre, livre.id_bibliotheque,livre.titre,livre.genre,livre.logo_livre,auteur.nom
-                              as auteur_name,editeur.nom
-                              as editeur_name
-                          FROM livre,publier,auteur,editeur
-                          WHERE publier.id_livre=livre.id_livre
-                              AND publier.id_auteur=auteur.id_auteur
-                              AND publier.id_editeur=editeur.id_editeur");
+                /*Sélectionne les valeurs dans les colonnes prenom et mail de la table
+                 *users pour chaque entrée de la table*/
+                $sth = $dbco->prepare("SELECT livre.titre,livre.id_livre,livre.genre,livre.logo_livre,livre.description,livre.page,livre.prix,auteur.nom as auteur_name,editeur.nom as editeur_name
 
-                        $anyname->execute();
+                FROM livre,publier,auteur,editeur
 
-                        /*Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs*/
-                        $resultat = $anyname->fetchAll(PDO::FETCH_ASSOC);
+                WHERE publier.id_livre=livre.id_livre AND publier.id_auteur=auteur.id_auteur AND publier.id_editeur=editeur.id_editeur");
+                $sth->execute();
 
-                        foreach ($resultat as $row => $livre) {
-                          echo "<tr>";
+                /*Retourne un tableau associatif pour chaque entrée de notre table
+                 *avec le nom des colonnes sélectionnées en clefs*/
+                $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-                          echo "<td>". $livre['id_livre']."</td>";
-                          echo "<td>". $livre['id_bibliotheque']."</td>";
-                          echo "<td>". $livre['titre']."</td>";
-                          echo "<td>". $livre['genre']."</td>";
-                          echo "<td>". $livre['auteur_name']."</td>";
-                          echo "<td>". $livre['editeur_name']."</td>";
-                          echo "<td> <img src='../uploads/". $livre['logo_livre']."'/></td>";
+				foreach ($result as $row => $livre) {
 
-                          echo "<td> <a class='btn btn-info btn-xs' href='starter.php?page=formlivre&id_livre=".$livre['id_livre']."'><span class='glyphicon glyphicon-edit'></span> Edit </a>";
-                          echo "<td> <a class='btn btn-danger btn-xs' href='".$chemin["deletelivre"]."?id_livre=".$livre['id_livre']."'><span class='glyphicon glyphicon-remove'></span> Delete </a>";
+					   echo "<tr>";
 
-                          echo "</tr>";
+						echo "<td>". $livre['titre']."</td>";
+						echo "<td>". $livre['genre']."</td>";
+						//echo "<td>". $livre['logolivre']."</td>";
+            echo "<td > <img src='../uploads/". $livre['logo_livre']."'></img></td>";
 
-                      }
+            echo "<td>". $livre['auteur_name']."</td>";
+						echo "<td>". $livre['editeur_name']."</td>";
+            echo "<td>". $livre['description']."</td>";
+            echo "<td>". $livre['page']."</td>";
+            echo "<td>". $livre['prix']."</td>";
 
-                      echo "</table>";
 
-                    }
+						echo "<td> <a class='btn btn-info btn-xs' href='starter.php?page=formlivre&id=".$livre['id_livre']."'><span class='glyphicon glyphicon-edit'></span> Edit</a>";
+            echo "<td> <a class='btn btn-danger btn-xs' href='".$chemin['deletelivre']."?id=".$livre['id_livre']."'><span class='glyphicon glyphicon-remove'></span> Delete</a>";
 
-                  catch(PDOException $e){
-                    echo "Erreur : ".$e->getMessage();
 
-                  }
+					echo "</tr>";
 
-?>
-            </div>
+				}
+
+			echo "</table>";
+                /*print_r permet un affichage lisible des résultats,
+                 *<pre> rend le tout un peu plus lisible*/
+
+            }
+
+            catch(PDOException $e){
+                echo "Erreur : " . $e->getMessage();
+            }
+        ?>
+
+		</table>
+    </div>
+        </div>
     </body>
 </html>
