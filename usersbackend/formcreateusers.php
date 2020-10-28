@@ -12,7 +12,7 @@ include "../includes/define.php";
 
 
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		  	      <link rel="stylesheet" href="../css/livre.css">
+		  	      <link rel="stylesheet" href="../css/css.css">
 
 <h1><?php echo $titreForm;?></h1>
 
