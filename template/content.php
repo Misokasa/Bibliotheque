@@ -6,13 +6,13 @@ include "includes/database.php";
 
 try{
 
-  $sth = $dbco->prepare("SELECT genre FROM livre");
+  $sth = $dbco->prepare("SELECT distinct genre FROM livre");
   $sth->execute();
   $listeGenre =$sth->fetchAll (PDO::FETCH_ASSOC);
 
 foreach ($listeGenre as $grow => $genre) {
 
-  echo $genre;
+  echo $genre["genre"];
 	echo "<div class='container'> <div class='row'>";
 
 }
@@ -24,10 +24,12 @@ $sth = $dbco->prepare(
          FROM livre, publier, auteur, editeur
          WHERE publier.id_livre=livre.id_livre
          AND publier.id_auteur=auteur.id_auteur
-         AND publier.id_editeur=editeur.id_editeur"
+         AND publier.id_editeur=editeur.id_editeur
+         AND livre.genre=:genre"
 );
 
-$sth->execute();
+$param=array("genre"=>$genre["genre"]);
+$sth->execute($param);
 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
@@ -58,12 +60,9 @@ foreach ($result as $row => $livre) {
 /*print_r permet un affichage lisible des résultats,
 *<pre> rend le tout un peu plus lisible*/
 
-}
-
     echo'</div>';
 		echo'</div>';
-	
-			}
+}
 
 catch(PDOException $e){
 echo "Erreur : " . $e->getMessage();
