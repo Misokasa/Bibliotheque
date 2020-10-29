@@ -38,7 +38,6 @@ $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row => $livre) {
 ?>
 
-
 <div class="card" style="width: 18rem;">
   <img src="uploads/<?php echo $livre['logo_livre'] ?>" class="card-img-top">
   <div class="card-body">
