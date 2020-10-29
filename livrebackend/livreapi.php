@@ -1,11 +1,9 @@
 <?php
 //phpinfo();
-
-    include "../includes/database.php";
-    include "../includes/functions.php";
-
-    $titre = securisation(@$_GET['titre']);
-    $sql = "SELECT * FROM livre WHERE titre LIKE '%".$titre."%'";
+include "../includes/database.php";
+ include "../includes/functions.php";
+  $titre = securisation(@$_GET['term']);
+ $sql = "SELECT * FROM livre WHERE titre LIKE '%".$titre."%'";
 
     $sth = $dbco->prepare($sql);
     $sth->execute();
@@ -17,13 +15,13 @@
       if($i>0)$json .=",";
        $json .="{";
         $livreList[]=$livre;
-        $json .='"id_livre":"'.$livre['id_livre'].'"';
-        $json .=',"titre":"'.$livre['titre'].'"';
-        $json .="}";
-        $i++;
+        $json .='"id":"'.$livre['id_livre'].'"';
+        $json .=',"value":"'.$livre['titre'].'"';
+       $json .="}";
+      $i++;
      }
-
      $json .="]";
+
 
   echo $json;
 

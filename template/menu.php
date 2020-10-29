@@ -35,7 +35,7 @@
 			</li>
 
 		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search" placeholder="Rechercher livre, auteur, ..." aria-label="Search">
+			<input id='search_livre' class="form-control mr-sm-2" type="search" placeholder="Rechercher livre, auteur, ..." aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 	</div>
@@ -44,14 +44,22 @@
 
 <script>
 
-$(function() {
-    $("#search_livre").autocomplete({
-        source: "livre/livreapi.php",
-        select: function( event, ui ) {
-            event.preventDefault();
-            $("#search_livre").val(ui.item.titre);
-        }
-    });
+
+
+$( document ).ready(function() {
+
+
+
+
+	$("#search_livre").autocomplete({
+			source: "livrebackend/livreapi.php",
+			select: function( event, ui ) {
+					event.preventDefault();
+					$("#search_livre").val(ui.item.value);
+			},
+
+	});
 });
+
 
 </script>
