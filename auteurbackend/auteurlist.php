@@ -23,7 +23,7 @@ include "../security/secure.php";
       <h1> Cours PHP / MySQL </h1>
           <h3> Base de données MySQL </h3>
 
-          <a class='btn btn-info btn-xs' href='formauteur.php'><span class='glyphicon glyphicon-edit'></span> Ajouter Auteur </a>
+          <a class='btn btn-info btn-xs' href='starter.php?page=formauteur'><span class='glyphicon glyphicon-edit'></span> Ajouter Auteur </a>
 
           <div class="container">
               <div class="row col-md-6 col-md-offset-2 custyle">

@@ -20,11 +20,11 @@ include "../includes/database.php";
 		//	$editeur=$result['id_editeur'];
 		// $publication=$result['date_de_publication'];
 
-				 $action="updateediteur.php";
+				 $action=$chemin["updateediteur"];
 				 $titreForm=" MODIFIER EDITEUR ";
 		}
 		else {
-			$action= "createediteur.php";
+			$action= $chemin["createediteur"];
 			$titreForm=" AJOUT DE L'EDITEUR ";
 
 		}

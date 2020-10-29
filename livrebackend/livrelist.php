@@ -35,9 +35,7 @@ include "../includes/define.php";
                  *users pour chaque entrée de la table*/
                 $sth = $dbco->prepare("SELECT livre.titre,livre.id_livre,livre.genre,livre.logo_livre,livre.description,livre.page,livre.prix,auteur.nom as auteur_name,editeur.nom as editeur_name
 
-                FROM livre,publier,auteur,editeur
-
-                WHERE publier.id_livre=livre.id_livre AND publier.id_auteur=auteur.id_auteur AND publier.id_editeur=editeur.id_editeur");
+                FROM livre left join publier on livre.id_livre=publier.id_livre left join auteur on  publier.id_auteur=auteur.id_auteur left join editeur on publier.id_editeur=editeur.id_editeur");
                 $sth->execute();
 
                 /*Retourne un tableau associatif pour chaque entrée de notre table

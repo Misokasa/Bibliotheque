@@ -10,7 +10,7 @@ if(@$_POST['id_editeur']!=""){
   $telephone=$_POST['telephone'];
 
   try{
-    
+
      $sql = "UPDATE editeur set id_editeur=:id_editeur,nom=:nom,adresse=:adresse,telephone=:telephone
      WHERE editeur.id_editeur=:id_editeur";
 
@@ -25,7 +25,7 @@ if(@$_POST['id_editeur']!=""){
      );
 
     $sth->execute($params);
-      header('Location:editeurlist.php');
+      header('Location:../admin/starter.php?page=editeurlist');
   }
 
   catch(PDOException $e){

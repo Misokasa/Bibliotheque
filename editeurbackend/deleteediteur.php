@@ -9,7 +9,7 @@ try{
 
   $sth = $dbco->prepare($sql);
  $sth->execute();
- header('Location:editeurlist.php');
+  header('Location:../admin/starter.php?page=editeurlist');
 }catch(PDOException $e){
 echo "Erreur : " . $e->getMessage();
 }

@@ -10,7 +10,7 @@ include "../includes/define.php";
 
 
 
-			$sql = "select livre.*,publier.date_de_publication  FROM livre,publier WHERE livre.id_livre=$livre and publier.id_livre=livre.id_livre";
+			$sql = "select livre.*,publier.date_de_publication  FROM livre left join publier on livre.id_livre=publier.id_livre WHERE livre.id_livre=$livre";
 			$sth = $dbco->prepare($sql);
 
 			$sth->execute();
@@ -82,7 +82,7 @@ include "../includes/define.php";
 		<div class="container">
         <form action="<?php echo $action;?>" method="post" enctype="multipart/form-data">
 
-		<input type="hidden" id="id_livre" name="id_livre" value="<?php echo @$id_livre;?>">
+		<input type="hidden" id="id_livre" name="id_livre" value="<?php echo @$livre;?>">
 		 				<div class="c100">
                 <label for="titre">Titre : </label>
                 <input type="text" id="titre" name="titre" value="<?php echo @$titre;?>">

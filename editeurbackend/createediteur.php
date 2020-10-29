@@ -21,7 +21,7 @@ include "../includes/functions.php";
                 $sql = "INSERT INTO editeur (nom,adresse,telephone)
                         VALUES(:nom,:adresse,:telephone)";
 
-                      $sth = $conn->prepare($sql);
+                      $sth = $dbco->prepare($sql);
 
                 $params=array(
 
@@ -32,10 +32,10 @@ include "../includes/functions.php";
 
                 $sth->execute($params);
 
-                $id_editeur=$conn->lastInsertId();
+                $id_editeur=$dbco->lastInsertId();
 
+                  header('Location:../admin/starter.php?page=editeurlist');
 
-				  //header('Location:livrelist.php');
                 echo 'Entree ajoutee dans la table';
 
              }

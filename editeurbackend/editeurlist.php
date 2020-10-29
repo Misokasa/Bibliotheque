@@ -1,6 +1,6 @@
 <?php
 include "../security/secure.php";
-
+include "../includes/database.php";
 ?>
 <!DOCTYPE html>
 
@@ -23,7 +23,7 @@ include "../security/secure.php";
       <h1> Cours PHP / MySQL </h1>
           <h3> Base de données MySQL </h3>
 
-          <a class='btn btn-info btn-xs' href='formediteur.php'><span class='glyphicon glyphicon-edit'></span> Ajouter Editeur </a>
+          <a class='btn btn-info btn-xs' href='?page=formediteur'><span class='glyphicon glyphicon-edit'></span> Ajouter Editeur </a>
 
           <div class="container">
               <div class="row col-md-6 col-md-offset-2 custyle">
@@ -31,9 +31,7 @@ include "../security/secure.php";
 
 <?php
 
-                      $servname = "localhost"; $dbname = "bd_megane_biblio"; $editeur = "root"; $password = "";
-                      try{$dbco = new PDO("mysql:host=$servname;dbname=$dbname", $editeur, $password);
-                        $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                try{
 
                         // Sélectionne tous les editeurs dans la table editeur
 

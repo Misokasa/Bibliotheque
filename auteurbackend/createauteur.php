@@ -25,7 +25,7 @@ include "../includes/functions.php";
                 $sql = "INSERT INTO auteur (nom,prenom,nationalite,photo_auteur)
                         VALUES(:nom,:prenom,:nationalite,:photo_auteur)";
 
-                      $sth = $conn->prepare($sql);
+                      $sth = $dbco->prepare($sql);
 
                 $params=array(
 
@@ -37,10 +37,10 @@ include "../includes/functions.php";
 
                 $sth->execute($params);
 
-                $id_auteur=$conn->lastInsertId();
+                $id_auteur=$dbco->lastInsertId();
 
 
-				  //header('Location:livrelist.php');
+				  header('Location:../admin/starter.php?page=auteurlist');
                 echo 'Entree ajoutee dans la table';
 
              }

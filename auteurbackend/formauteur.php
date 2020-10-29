@@ -1,6 +1,7 @@
 <?php
 include "../security/secure.php";
 include "../includes/database.php";
+include "../includes/define.php";
 
 		if(@$_GET['id_auteur']!=""){
 			$auteur=$_GET['id_auteur'];
@@ -19,11 +20,11 @@ include "../includes/database.php";
 			$nationalite=$result['nationalite'];
 			$photo=$result['photo_auteur'];
 
-				 $action="updateauteur.php";
+				 $action=$chemin["updateauteur"];
 				 $titreForm=" MODIFIER AUTEUR ";
 		}
 		else {
-			$action= "createauteur.php";
+			$action= $chemin["createauteur"];
 			$titreForm=" AJOUT DE L'AUTEUR ";
 
 		}
