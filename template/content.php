@@ -58,7 +58,7 @@ foreach ($result as $row => $livre) {
 /*print_r permet un affichage lisible des résultats,
 *<pre> rend le tout un peu plus lisible*/
 }
-
+    echo'</div>';
     echo'</div>';
 		echo'</div>';
 }
