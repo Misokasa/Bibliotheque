@@ -6,6 +6,17 @@ include "includes/database.php";
 
 try{
 
+  $sth = $dbco->prepare("SELECT genre FROM livre");
+  $sth->execute();
+  $listeGenre =$sth->fetchAll (PDO::FETCH_ASSOC);
+
+foreach ($listeGenre as $grow => $genre) {
+
+  echo $genre;
+	echo "<div class='container'> <div class='row'>";
+
+}
+
 $sth = $dbco->prepare(
  "SELECT livre.titre, livre.id_livre, livre.genre, livre.logo_livre,
          auteur.nom as auteur_name,
@@ -26,16 +37,19 @@ $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row => $livre) {
 ?>
 
-<div col="col-4">
-    <div class="card text-black border-success mb-3 livrecard">
-      <img class="" src="uploads/<?php echo $livre['logo_livre'] ?>" alt="Card image cap">
-         <div class="card-body">
-           <h5 class="card-title"><?php echo $livre['titre'] ?></h5>
-           <p class="card-text"><?php echo $livre['genre'] ?></p>
-           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-           <a class="btn btn-success" href="?id=<?php echo $livre['id_livre'] ?>&page=livre">Détails</a>
-        </div>
-      </div>
+
+<div class="card" style="width: 18rem;">
+  <img src="uploads/<?php echo $livre['logo_livre'] ?>" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title"><?php echo $livre['titre'] ?></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><?php echo $livre['auteur'] ?></h6>
+    <p class="card-text"><?php echo $livre['description']?></p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><?php echo $livre['page']?></li>
+            <li class="list-group-item"><?php echo $livre['prix']?></li>
+        </ul>
+    <a href="#" class="btn btn-primary">Plus</a>
+  </div>
 </div>
 
 <?php
@@ -45,6 +59,11 @@ foreach ($result as $row => $livre) {
 *<pre> rend le tout un peu plus lisible*/
 
 }
+
+    echo'</div>';
+		echo'</div>';
+	
+			}
 
 catch(PDOException $e){
 echo "Erreur : " . $e->getMessage();
