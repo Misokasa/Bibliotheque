@@ -4,13 +4,15 @@ include "includes/database.php";
 
 try{
 
-  $sth = $dbco->prepare("SELECT distinct genre FROM livre");
+  $sth = $dbco->prepare("SELECT distinct genre FROM livre,pubier where livre.id_livre=pubier.id_livre ");
   $sth->execute();
   $listeGenre =$sth->fetchAll (PDO::FETCH_ASSOC);
 
 foreach ($listeGenre as $grow => $genre) {
-
-  echo $genre["genre"];
+	echo '<div class="page-header">';
+	echo '<h1>';
+	echo $genre["genre"];
+	echo '</h1>';
 	echo "<div class='container'> <div class='row'>";
 
 $sth = $dbco->prepare(

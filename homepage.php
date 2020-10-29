@@ -6,27 +6,7 @@
      *Si l'id de session n'existe  pas, session_id() rnevoie une chaine
      *de caractères vide*/
 
-     require_once 'template/menu.php';
 ?>
-
-     <div class="container-fluid">
-       <?php
-        require_once 'includes/functions.php';
-        @$page=securisation($_GET["page"]);
-        if($page =="" || $page=="content")
-        {
-          include 'template/content.php' ;
-        }
-          else if($page== "livre"){
-
-          include 'template/livre.php';
-        }
-        ?>
-      </div>
-
-      <?php
-      include "template/footer.php";
-      ?>
 
     <!DOCTYPE html>
 <html>
@@ -55,6 +35,29 @@
     </head>
 
     <body>
+	
+	<?php 
+		require_once 'template/menu.php'; 
+	 ?>
+	 
+     <div class="container-fluid">
+       <?php
+        require_once 'includes/functions.php';
+        @$page=securisation($_GET["page"]);
+        if($page =="" || $page=="content")
+        {
+          include 'template/content.php' ;
+        }
+          else if($page== "livre"){
+
+          include 'template/livre.php';
+        }
+        ?>
+      </div>
+
+      <?php
+      include "template/footer.php";
+      ?>
 
 </body>
 
