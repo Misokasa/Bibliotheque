@@ -1,5 +1,3 @@
-<div class="row">
-
 <?php
 include "includes/define.php";
 include "includes/database.php";
@@ -66,5 +64,3 @@ catch(PDOException $e){
 echo "Erreur : " . $e->getMessage();
 }
 ?>
-
-</div>
