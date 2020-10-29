@@ -13,7 +13,7 @@ function uploadfile($fieldName,$overwrite=false)
 
 		// Check if image file is a actual image or fake image
 
-		$check = getimagesize($_FILES[$fieldName]["tmp_name"]);
+		@$check = getimagesize($_FILES[$fieldName]["tmp_name"]);
 		if($check !== false)
 		{
 			echo "File is an image - " . $check["mime"] . ".";
