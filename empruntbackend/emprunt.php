@@ -8,7 +8,7 @@
   $nom=$_POST['nom'];
   $prenom=$_POST['prenom'];
   $telephone=$_POST['telephone'];
-  $emprunt =$_POST['date_emprunt'];
+  $emprunt = date('Y-m-d');
 
 				$paramsClients=array(':nom' => $nom,
 				':prenom' => $prenom,
@@ -19,17 +19,21 @@
 
 
 				$anyname->execute($paramsClients);
-				$id_client=$dbco->lastInsertId();
+				$client=$dbco->lastInsertId();
+
+echo $client;
+echo "<hr>";
 
 				$paramsEmprunt=array(':id_client' => $client,
 				':date_emprunt' => $emprunt,
 				 ':id_livre'=>$livre);
 
-				$sql = "INSERT INTO emprunter (date_emprunt,id_client,id_livre) VALUE (:date_emprunt,:id_client,:id_livre)";
+				$sql = "INSERT INTO emprunter (date_emprunt,id_client,id_livre) VALUE ('$emprunt',$client,$livre)";
 				$anyname= $dbco->prepare( $sql);
 
+echo $sql;
 
-				$anyname->execute($paramsEmprunt);
+				$anyname->execute();
 				header("Location:../homepage.php");
 
 

@@ -4,7 +4,7 @@ include "includes/database.php";
 
 try{
 
-  $sth = $dbco->prepare("SELECT distinct genre FROM livre,publier where livre.id_livre=publier.id_livre ");
+  $sth = $dbco->prepare("SELECT distinct genre FROM livre, publier where livre.id_livre=publier.id_livre ");
   $sth->execute();
   $listeGenre =$sth->fetchAll (PDO::FETCH_ASSOC);
 

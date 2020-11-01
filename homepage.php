@@ -35,11 +35,11 @@
     </head>
 
     <body>
-	
-	<?php 
-		require_once 'template/menu.php'; 
+
+	<?php
+		require_once 'template/menu.php';
 	 ?>
-	 
+
      <div class="container-fluid">
        <?php
         require_once 'includes/functions.php';
@@ -52,6 +52,11 @@
 
           include 'template/livre.php';
         }
+
+        else if($page== "formemprunt"){
+
+        include 'empruntbackend/formemprunt.php';
+      }
         ?>
       </div>
 

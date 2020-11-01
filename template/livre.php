@@ -54,7 +54,7 @@ $publication=$result['date_de_publication'];
 		   				<p class="card-prix"><?php echo $prix;?></p>
 		  			<hr>
          			<p class="card-date"> Publication <small class="text-muted"><?php echo $publication;?></small></p>
-          		<a class="btn btn-success"> Emprunter </a>
+							<a href="?id=<?php echo $livre;?>&page=formemprunt" class="btn btn-success"> Emprunter </a>
 		  		</div>
 	   		</div>
 			</div>

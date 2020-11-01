@@ -1,9 +1,9 @@
 <?php
 //phpinfo();
 include "../includes/database.php";
- include "../includes/functions.php";
+include "../includes/functions.php";
   $titre = securisation(@$_GET['term']);
- $sql = "SELECT * FROM livre WHERE titre LIKE '%".$titre."%'";
+  $sql = "SELECT * FROM livre WHERE titre LIKE '%".$titre."%'";
 
     $sth = $dbco->prepare($sql);
     $sth->execute();
