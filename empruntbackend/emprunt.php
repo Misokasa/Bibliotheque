@@ -21,8 +21,8 @@
 				$anyname->execute($paramsClients);
 				$client=$dbco->lastInsertId();
 
-echo $client;
-echo "<hr>";
+// echo $client;
+// echo "<hr>";
 
 				$paramsEmprunt=array(':id_client' => $client,
 				':date_emprunt' => $emprunt,
@@ -31,7 +31,7 @@ echo "<hr>";
 				$sql = "INSERT INTO emprunter (date_emprunt,id_client,id_livre) VALUE ('$emprunt',$client,$livre)";
 				$anyname= $dbco->prepare( $sql);
 
-echo $sql;
+// echo $sql;
 
 				$anyname->execute();
 				header("Location:../homepage.php");
