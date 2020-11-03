@@ -75,57 +75,40 @@ include "../security/secure.php";
 
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item has-treeview menu-open">
-                  <a href="#" class="nav-link active">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                      <p> Starter Pages
-                          <i class="right fas fa-angle-left"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="#" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p> Active Page </p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                       <a href="starter.php?page=livrelist" class="nav-link">
-                         <i class="far fa-circle nav-icon"></i>
-                         <p> Livres </p>
-                      </a>
-                    </li>
-                </ul>
+              <li class="nav-item">
+                <a href="starter.php?page=livrelist" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                    <p> Livres </p>
+                </a>
               </li>
-
               <li class="nav-item">
                 <a href="starter.php?page=bibliolist" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p> Bibliothèque <span class="right badge badge-danger"> New </span> </p>
+                  <p> Bibliothèque </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="starter.php?page=userslist" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                    <p> Utilisateurs <span class="right badge badge-danger"> New </span> </p>
+                    <p> Utilisateurs </p>
                 </a>
               </li>
               <li class="nav-item">
                  <a href="starter.php?page=auteurlist" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
-                    <p> Auteur <span class="right badge badge-danger"> New </span> </p>
+                    <p> Auteur </p>
                 </a>
               </li>
               <li class="nav-item">
                   <a href="starter.php?page=editeurlist" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
-                    <p> Editeur <span class="right badge badge-danger"> New </span> </p>
+                    <p> Editeur </p>
                   </a>
               </li>
               <li class="nav-item">
                   <a href="../identification/logout.php" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
-                    <p> <span class=" badge badge-danger"> Log Out </span> </p>
+                    <p><button type="button" class="btn btn-danger">Log Out</button></p>
                   </a>
               </li>
             </ul>
@@ -157,7 +140,7 @@ include "../security/secure.php";
 
    </footer>
 
-
+                <script src="../js/icon.js"></script>
                       <!-- jQuery -->
                 <script src="../js/jquery.min.js"></script>
                       <!-- Bootstrap 4 -->
