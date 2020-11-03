@@ -1,5 +1,5 @@
 <?php
-include "database.php";
+include "../includes/database.php";
 
 @$email=$_GET["email"];
 // Instruction : Vérifier si $mail existe dans la table users
