@@ -1,10 +1,10 @@
-<footer>
+<footer class="footer">
 	<script src="js/icons.js"></script>
 
 
 
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-8">
 				<div class="row">
