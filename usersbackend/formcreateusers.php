@@ -399,7 +399,7 @@ if($password==$repassword)
 
  else
  {
-("#repassword").css({color :'red', borderColor :'red'});
+	$("#repassword").css({color :'red', borderColor :'red'});
 ('#error_repassword').html("password non indentiques");
 }
 
