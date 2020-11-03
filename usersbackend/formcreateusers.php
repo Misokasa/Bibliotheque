@@ -48,7 +48,7 @@ include "../includes/define.php";
 																	 Password<input type="text" name="password" id="password" /><span id='error_password' style="color:red"> </span><br/>
 																 </div>
 																 <div class="alert alert-danger" role="alert">
-																	 Retypeassword<input type="text" name="repassword" id="repassword" /><span id='error_repassword' style="color:red"> </span><br/>
+																	 Retype password<input type="text" name="repassword" id="repassword" /><span id='error_repassword' style="color:red"> </span><br/>
 																 </div>
 																 <div class="alert alert-warning" role="alert">
 				 		                         <label for="date">Date de naissance : </label>
